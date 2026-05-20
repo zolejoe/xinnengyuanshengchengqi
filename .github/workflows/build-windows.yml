@@ -1,0 +1,55 @@
+name: Build Windows EXE
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:          # 支持手动触发
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Python 3.9
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.9"
+
+      - name: 安装依赖
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: 使用 PyInstaller 打包
+        run: |
+          pyinstaller --name="新能源曲线生成器" `
+            --windowed `
+            --add-data="发电侧日前交易模板-新能源曲线.xlsx;." `
+            --hidden-import=pandas `
+            --hidden-import=openpyxl `
+            --hidden-import=PySide6 `
+            --hidden-import=PySide6.QtCore `
+            --hidden-import=PySide6.QtWidgets `
+            --hidden-import=PySide6.QtGui `
+            --hidden-import=PySide6.QtNetwork `
+            --hidden-import=shiboken6 `
+            --exclude-module=tkinter `
+            --exclude-module=matplotlib `
+            --exclude-module=scipy `
+            --exclude-module=IPython `
+            --exclude-module=torch `
+            --exclude-module=tensorflow `
+            --exclude-module=numba `
+            --exclude-module=llvmlite `
+            --clean `
+            --noconfirm `
+            power_forecast_pyside.py
+
+      - name: 上传 EXE 产物
+        uses: actions/upload-artifact@v4
+        with:
+          name: 新能源曲线生成器-Windows
+          path: dist/新能源曲线生成器/

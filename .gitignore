@@ -1,0 +1,54 @@
+# ============ 虚拟环境 ============
+myenv/
+myenv_new/
+.env/
+venv/
+env/
+
+# ============ 打包输出 ============
+build/
+dist/
+*.spec
+*.toc
+__pycache__/
+*.pyc
+
+# ============ 数据/隐私文件 ============
+# 原始功率预测数据（含隐私信息）
+*功率预测*.xlsx
+*~$*.xlsx
+
+# 其他业务数据
+*节点电价*.xlsx
+合并结果.xlsx
+
+# 场站中间数据
+emergeData/
+merged_results/
+test_output/
+
+# 压缩包
+归档.zip
+dist.zip
+
+# ============ 无关脚本 ============
+# 仅保留 power_forecast_pyside.py，其他脚本不提交
+app.py
+app-mac.py
+app-win.py
+autoNextDayPower.py
+emerge.py
+test.py
+
+# ============ 系统文件 ============
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# ============ 其他 ============
+new/
+3.26/
+build_win.bat
+requirements-win.txt
+.vscode/
