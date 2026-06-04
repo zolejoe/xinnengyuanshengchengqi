@@ -25,7 +25,7 @@ jobs:
 
       - name: 使用 PyInstaller 打包
         run: |
-          pyinstaller --name="新能源曲线生成器" `
+          pyinstaller --onefile --name="新能源曲线生成器" `
             --windowed `
             --add-data="发电侧日前交易模板-新能源曲线.xlsx;." `
             --hidden-import=pandas `
