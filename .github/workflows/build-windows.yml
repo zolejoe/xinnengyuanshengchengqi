@@ -52,4 +52,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: 新能源曲线生成器-Windows
-          path: dist/dist/新能源曲线生成器.exe 
+          path: dist/新能源曲线生成器.exe 
